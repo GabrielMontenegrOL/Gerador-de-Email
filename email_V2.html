@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <link rel="icon" href="https://www.energisa.com.br/sites/energisa/files/Energisa120%20%281%29.ico" type="image/png"> 
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gerador de Email</title>
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@latest/dist/clipboard.min.js"></script>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9fb;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+      justify-content: flex-start;
+      position: relative;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 16px;
+    }
+
+    .inline-inputs {
+      display: flex;
+      gap: 10px;
+    }
+
+    .asterisco {
+      color: red;
+      display: none;
+      font-weight: bold;
+      margin-left: 4px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      flex: 1;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #textoFinal {
+      margin-top: 30px;
+      background: #f4f4f6;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    #textoAdicional {
+      display: inline-block;
+      background-color: #e9e9ec;
+      padding: 6px 10px;
+      border-radius: 5px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 500px) {
+      .inline-inputs {
+        flex-direction: column;
+      }
+
+      button {
+        flex: 1 1 100%;
+      }
+    }
+
+    .equipe-texto {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* Estilo do rodapé */
+    footer {
+      margin-top: 40px;
+      font-size: 14px;
+      color: #666;
+      text-align: center;
+      width: 100%;
+      max-width: 600px;
+      padding: 10px 0;
+      border-top: 1px solid #ddd;
+    }
+
+    footer a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+  input[type="text"]:focus {
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Efeito ao focar */
+    border-color: #4285f4; /* Azul para borda ao focar */
+    outline: none; /* Remove a borda padrão do navegador */
+  }
+
+  input[type="text"]:hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Efeito ao passar mouse */
+    border-color: #999; /* Cor de borda mais escura ao passar mouse */
+  }
+  
+  </style>
+</head>
+<body>
+  <h1>Gerador de Email</h1>
+  <div class="container">
+    <div class="form-group">
+      <label for="ocorrencia">Ocorrência:<span id="ocorrenciaAsterisco" class="asterisco">*</span></label>
+      <input type="text" id="ocorrencia" />
+    </div>
+
+    <div class="form-group">
+      <label for="uc">UC:<span id="ucAsterisco" class="asterisco">*</span></label>
+      <input type="text" id="uc" />
+    </div>
+
+    <div class="form-group">
+      <label for="data">Data (dd/mm):<span id="dataAsterisco" class="asterisco">*</span></label>
+      <input type="text" id="data" />
+    </div>
+
+    <div class="form-group">
+      <label>Hora Início:<span id="horaInicioAsterisco" class="asterisco">*</span> <span id="minutosInicioAsterisco" class="asterisco">*</span></label>
+      <div class="inline-inputs">
+        <input type="text" id="horaInicio" placeholder="HH" />
+        <input type="text" id="minutosInicio" placeholder="MM" />
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Hora Fim:<span id="horaFimAsterisco" class="asterisco">*</span> <span id="minutosFimAsterisco" class="asterisco">*</span></label>
+      <div class="inline-inputs">
+        <input type="text" id="horaFim" placeholder="HH" />
+        <input type="text" id="minutosFim" placeholder="MM" />
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button onclick="gerarEmail()">Gerar Email</button>
+      <button id="copiarBotao" onclick="copiarTexto()">Copiar Texto</button>
+      <button id="alternarBotao" onclick="alternarEquipe()">Alternar Equipes</button>
+    </div>
+
+    <div class="equipe-texto">Equipe atual: <span id="equipeTexto">SINERGIA</span></div>
+
+    <div id="textoFinal"></div>
+  </div>
+
+  <script>
+    // Função para formatar a data automaticamente no formato dd/mm
+    const inputData = document.getElementById('data');
+
+    inputData.addEventListener('input', () => {
+      let valor = inputData.value;
+
+      // Remove tudo que não seja número
+      valor = valor.replace(/[^\d]/g, '');
+
+      // Limita a 4 dígitos (ddmm)
+      if (valor.length > 4) {
+        valor = valor.slice(0,4);
+      }
+
+      // Insere a barra após os dois primeiros números
+      if (valor.length > 2) {
+        valor = valor.slice(0,2) + '/' + valor.slice(2);
+      }
+
+      inputData.value = valor;
+    });
+
+    var equipe = "SINERGIA";
+    var textoAdicional = "";
+
+    function alternarEquipe() {
+      equipe = (equipe === "SINERGIA") ? "FISGA" : "SINERGIA";
+      document.getElementById("equipeTexto").textContent = equipe;
+    }
+
+    function copiarTexto() {
+      var htmlContent = document.getElementById("textoFinal").innerHTML;
+
+      var blob = new Blob([htmlContent], { type: "text/html" });
+      var data = [new ClipboardItem({ "text/html": blob })];
+
+      navigator.clipboard.write(data).then(function () {
+        alert("O texto com formatação foi copiado para a área de transferência.");
+      }).catch(function (err) {
+        console.error("Erro ao copiar: ", err);
+        alert("Não foi possível copiar com formatação. Seu navegador pode não suportar essa funcionalidade.");
+      });
+    }
+
+    function gerarEmail() {
+      var ocorrencia = document.getElementById("ocorrencia").value.trim();
+      var uc = document.getElementById("uc").value.trim();
+      var data = document.getElementById("data").value.trim();
+      var horaInicio = document.getElementById("horaInicio").value.trim();
+      var minutosInicio = document.getElementById("minutosInicio").value.trim();
+      var horaFim = document.getElementById("horaFim").value.trim();
+      var minutosFim = document.getElementById("minutosFim").value.trim();
+
+      // Exibe os asteriscos se faltar campo
+      document.getElementById("ocorrenciaAsterisco").style.display = ocorrencia ? "none" : "inline";
+      document.getElementById("ucAsterisco").style.display = uc ? "none" : "inline";
+      document.getElementById("dataAsterisco").style.display = data ? "none" : "inline";
+      document.getElementById("horaInicioAsterisco").style.display = horaInicio ? "none" : "inline";
+      document.getElementById("minutosInicioAsterisco").style.display = minutosInicio ? "none" : "inline";
+      document.getElementById("horaFimAsterisco").style.display = horaFim ? "none" : "inline";
+      document.getElementById("minutosFimAsterisco").style.display = minutosFim ? "none" : "inline";
+
+      if (!ocorrencia || !uc || !data || !horaInicio || !minutosInicio || !horaFim || !minutosFim) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return;
+      }
+
+      var dataFormatada = data.split("/").join("/"); // já está formatada com /
+      var horaInicioFormatada = `<strong>${horaInicio}h${minutosInicio}</strong>`;
+      var horaFimFormatada = `<strong>${horaFim}h${minutosFim}</strong>`;
+
+      var textoPadrao = `Boa tarde!<br>
+Informamos que estaremos atendendo através da ocorrência N.º <strong>2025-${ocorrencia}</strong>, solicitação para o desligamento da UC:<strong> 5/ ${uc}</strong>, no dia <strong>${dataFormatada}</strong> das ${horaInicioFormatada} às ${horaFimFormatada}, conforme solicitação em anexo.<br>`;
+
+      if (textoAdicional) {
+        textoPadrao += `<br>${textoAdicional}<br>`;
+      }
+
+      textoPadrao += `<br>Desligamento a pedido do cliente
+Equipe responsável pela operação das chaves em campo: ${equipe}<br>
+Atenciosamente.`;
+
+      document.getElementById("textoFinal").innerHTML = textoPadrao;
+    }
+
+    new ClipboardJS('#copiarBotao');
+  </script>
+
+  <footer>
+    Desenvolvido por <a href="https://www.linkedin.com/in/gabriel-montenegro7/" target="_blank" rel="noopener noreferrer">Gabriel Montenegro</a>
+  </footer>
+  
+</body>
+</html>
+

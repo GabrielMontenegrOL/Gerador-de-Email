@@ -1,3 +1,4 @@
+<img width="1920" height="1080" alt="{67AA7156-26B9-458A-B003-45B7DDA6C44D}" src="https://github.com/user-attachments/assets/461ea2d5-09bd-4ee0-b959-1a9c6c8d6e39" />
 # Gerador de Email 📧
 
 Durante minha experiência como jovem aprendiz na Energisa, criei uma ferramenta web simples e eficiente que contribuiu significativamente para a otimização do tempo da equipe. Essa ferramenta automatiza a criação de e-mails padronizados, facilitando a comunicação operacional, especialmente em relação a ocorrências, desligamentos e gestão das equipes responsáveis.
@@ -23,6 +24,11 @@ Durante minha experiência como jovem aprendiz na Energisa, criei uma ferramenta
 3. Clique em Gerar Email para visualizar o texto formatado.
 4. Utilize o botão Copiar Texto para copiar o conteúdo já formatado para a área de transferência.
 5. Para alternar entre as equipes responsáveis, clique em Alternar Equipes.
+
+## Autor
+[Gabriel Montenegro](https://www.linkedin.com/in/gabriel-montenegro7/)
+
+
 
 
 

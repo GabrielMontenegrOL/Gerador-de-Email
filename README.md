@@ -16,9 +16,6 @@ Durante minha experiência como jovem aprendiz na Energisa, criei uma ferramenta
 - **HTML/CSS** para interface básica
 - **CSS3**
 
-## Captura de tela
-<img width="1920" height="1080" alt="{67AA7156-26B9-458A-B003-45B7DDA6C44D}" src="https://github.com/user-attachments/assets/461ea2d5-09bd-4ee0-b959-1a9c6c8d6e39" />
-
 ## 📦 Como Instalar o Projeto
 
 1. Acesse o arquivo index.html em seu navegador favorito.
@@ -26,6 +23,9 @@ Durante minha experiência como jovem aprendiz na Energisa, criei uma ferramenta
 3. Clique em Gerar Email para visualizar o texto formatado.
 4. Utilize o botão Copiar Texto para copiar o conteúdo já formatado para a área de transferência.
 5. Para alternar entre as equipes responsáveis, clique em Alternar Equipes.
+
+## Captura de tela
+<img width="1920" height="1080" alt="{67AA7156-26B9-458A-B003-45B7DDA6C44D}" src="https://github.com/user-attachments/assets/461ea2d5-09bd-4ee0-b959-1a9c6c8d6e39" />
 
 ## Autor
 [Gabriel Montenegro](https://www.linkedin.com/in/gabriel-montenegro7/)

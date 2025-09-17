@@ -90,7 +90,7 @@
 
     button:hover {
       background-color: #0056b3;
-    }
+    } 
 
     #textoFinal {
       margin-top: 30px;
@@ -278,7 +278,7 @@
       var horaFimFormatada = `<strong>${horaFim}h${minutosFim}</strong>`;
 
       var textoPadrao = `Boa tarde!<br>
-Informamos que estaremos atendendo através da ocorrência N.º <strong>2025-${ocorrencia}</strong>, solicitação para o desligamento da UC:<strong> 5/ ${uc}</strong>, no dia <strong>${dataFormatada}</strong> das ${horaInicioFormatada} às ${horaFimFormatada}, conforme solicitação em anexo.<br>`;
+Informamos que estaremos atendendo através da ocorrência N.º <strong>2025-${ocorrencia}</strong>, solicitação para o desligamento da UC:<strong> 5/${uc}</strong>, no dia <strong>${dataFormatada}</strong> das ${horaInicioFormatada} às ${horaFimFormatada}, conforme solicitação em anexo.<br>`;
 
       if (textoAdicional) {
         textoPadrao += `<br>${textoAdicional}<br>`;
